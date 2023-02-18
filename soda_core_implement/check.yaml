@@ -1,0 +1,2 @@
+checks for test_soda:
+  - row_count > 0 
