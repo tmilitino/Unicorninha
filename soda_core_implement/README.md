@@ -3,4 +3,4 @@
 
 ## Fluxo
 
-![Diagram](http://jgraph.github.io/drawio-github/fluxo_soda.drawio)
+![Diagram](http://jgraph.github.io/DataQualityBenchmarks/soda_core_implement/fluxo_soda.drawio)
