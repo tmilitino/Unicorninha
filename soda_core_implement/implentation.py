@@ -29,12 +29,14 @@ spark_session = SparkSession \
     .appName("soda core scan") \
     .getOrCreate()
  
-df = spark_session.read.csv("./sample/taxi_yellow_2019_01_without_errors.csv", schema=schema)
+df = spark_session.read.csv("./sample/taxi_yellow_2019_02_with_errors.csv", schema=schema, header=True)
 df.createOrReplaceTempView(f"{table_name}")
+
+print(df.filter(~df.rate_code_id.isin(1,2,3,4,5)).show())
 
 scan = Scan()
 
-scan.   set_scan_definition_name('SODA_CORE_SCAN')
+scan.set_scan_definition_name('SODA_CORE_SCAN')
 scan.set_data_source_name("spark_df")
 
 scan.add_configuration_yaml_file(file_path="./configuration.yaml")
@@ -67,8 +69,8 @@ scan.get_logs_text()
 
 # Typical log inspection
 ##################
-scan.assert_no_error_logs()
-scan.assert_no_checks_fail()
+# scan.assert_no_error_logs()
+# scan.assert_no_checks_fail()
 
 # Advanced methods to inspect scan execution logs 
 #################################################
@@ -78,8 +80,8 @@ scan.get_error_logs_text()
 # Advanced methods to review check results details
 ########################################
 print(scan.get_checks_fail())
-scan.has_check_fails()
-scan.get_checks_fail_text()
+print(scan.has_check_fails())
+print(scan.get_checks_fail_text())
 scan.assert_no_checks_warn_or_fail()
 scan.get_checks_warn_or_fail()
 scan.has_checks_warn_or_fail()
