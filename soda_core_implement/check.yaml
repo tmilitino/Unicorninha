@@ -1,0 +1,41 @@
+checks for test_soda:
+  - row_count > 0 
+  - invalid_count(vendor_id) = 0:
+      valid values: [1,2,4]
+      valid format: date iso 8601
+  - invalid_count(pickup_datetime) = 0:
+      valid format: date iso 8601
+  - invalid_count(dropoff_datetime) = 0:
+      valid format: date iso 8601
+  - invalid_count(passenger_count) = 0:
+      valid format: integer
+      valid values: [1,2,3,4,5]
+  - invalid_count(trip_distance) = 0:
+      valid format: decimal point
+  - invalid_count(rate_code_id) = 0:
+      valid format: integer
+      valid values: [1,2,3,4,5]
+  - invalid_count(store_and_fwd_flag) = 0:
+      valid values: ['Y','N']
+  - invalid_count(pickup_location_id) = 0:
+      valid format: integer
+  - invalid_count(dropoff_location_id) = 0:
+      valid format: integer
+  - invalid_count(payment_type) = 0:
+      valid format: decimal point
+  - invalid_count(fare_amount) = 0:
+      valid format: decimal point
+  - invalid_count(extra) = 0:
+      valid format: decimal point
+  - invalid_count(mta_tax) = 0:
+      valid format: decimal point
+  - invalid_count(tip_amount) = 0:
+      valid format: decimal point
+  - invalid_count(tolls_amount) = 0:
+      valid format: decimal point
+  - invalid_count(improvement_surcharge) = 0:
+      valid format: decimal point
+  - invalid_count(total_amount) = 0:
+      valid format: decimal point
+  - invalid_count(congestion_surcharge) = 0:
+      valid format: decimal point
