@@ -1,34 +1,26 @@
-from soda.scan import Scan
-
 from pyspark.sql import SparkSession
+from soda.scan import Scan
 
 table_name = "test_soda"
 
 spark_session = SparkSession \
     .builder \
-    .appName("Python Spark SQL basic example") \
-    .config("spark.some.config.option", "some-value") \
+    .appName("soda core scan") \
     .getOrCreate()
  
-
-
 df = spark_session.read.csv("./sample/taxi_yellow_2019_01_without_errors.csv")
 df.createOrReplaceTempView(f"{table_name}")
 
 scan = Scan()
 
-scan.set_scan_definition_name('YOUR_SCHEDULE_NAME')
+scan.   set_scan_definition_name('SODA_CORE_SCAN')
 scan.set_data_source_name("spark_df")
 
 scan.add_configuration_yaml_file(file_path="./configuration.yaml")
 scan.add_spark_session(spark_session)
 
-checks  =f"""
-checks for {table_name}:
-  - row_count > 0 
-"""
 # If you defined checks in a file accessible via Spark, you can use the scan.add_sodacl_yaml_file method to retrieve the checks
-scan.add_sodacl_yaml_str(checks)
+scan.add_sodacl_yaml_file("./check.yaml")
 
 # Execute the scan
 ##################
@@ -41,7 +33,7 @@ scan.set_verbose(True)
 # Set scan definition name, equivalent to CLI -s option;
 # see Tips and best practices below
 ##################
-scan.set_scan_definition_name("YOUR_SCHEDULE_NAME")
+scan.set_scan_definition_name("SODA_CORE_SCAN")
 
 
 # Inspect the scan result
