@@ -3,6 +3,8 @@ import pydeequ
 from pyspark.sql.types import *
 from pydeequ.checks import *
 from pydeequ.verification import *
+from pydeequ.repository import *
+from pydeequ.analyzers import *
 
 
 schema = StructType([
@@ -57,6 +59,10 @@ analysisResult_df.show(100)
 # okay
 
 check = Check(spark_session, CheckLevel.Warning, "Review Check")
+metrics_file = FileSystemMetricsRepository.helper_metrics_file(spark_session, 'metrics.json')
+repository = FileSystemMetricsRepository(spark_session, metrics_file)
+key_tags = {'tag': 'pydeequ hello world'}
+resultKey = ResultKey(spark_session, ResultKey.current_milli_time(), key_tags)
 
 checkResult = VerificationSuite(spark_session) \
     .onData(df) \
@@ -69,6 +75,8 @@ checkResult = VerificationSuite(spark_session) \
         .isContainedIn("rate_code_id", ['1','2','3','4','5']) \
         .isNonNegative("dropoff_location_id") \
         .isNonNegative("trip_distance")) \
+  .useRepository(repository)\
+  .saveOrAppendResult(resultKey)\
     .run()
 
 checkResult_df = VerificationResult.checkResultsAsDataFrame(spark_session, checkResult)
