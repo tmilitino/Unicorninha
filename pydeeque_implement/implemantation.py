@@ -1,6 +1,9 @@
 from pyspark.sql import SparkSession, Row
 import pydeequ
 from pyspark.sql.types import *
+from pydeequ.checks import *
+from pydeequ.verification import *
+
 
 schema = StructType([
     StructField("vendor_id", IntegerType()),
@@ -39,69 +42,37 @@ analysisResult = AnalysisRunner(spark_session) \
                     .addAnalyzer(Size()) \
                     .addAnalyzer(Completeness("vendor_id")) \
                     .addAnalyzer(Completeness("store_and_fwd_flag")) \
-                    .addAnalyzer(Completeness("dropoff_datetime")) \
-                    .addAnalyzer(Completeness("total_amount")) \
+                    .addAnalyzer(Completeness("dropoff_datetime"))\
+                    .addAnalyzer(Entropy("vendor_id"))\
+                    .addAnalyzer(Mean("total_amount"))\
+                    .addAnalyzer(Maximum("total_amount"))\
+                    .addAnalyzer(Entropy("rate_code_id"))\
+                    .addAnalyzer(Entropy("payment_type"))\
                     .run()
 
 analysisResult_df = AnalyzerContext.successMetricsAsDataFrame(spark_session, analysisResult)
-analysisResult_df.show()
+analysisResult_df.show(100)
 
-## erro
-# from pydeequ.profiles import *
 
-# result = ColumnProfilerRunner(spark) \
-#     .onData(df) \
-#     .run()
+# okay
 
-# for col, profile in result.profiles.items():
-#     print(profile)
+check = Check(spark_session, CheckLevel.Warning, "Review Check")
 
-## erro
-# from pydeequ.suggestions import *
+checkResult = VerificationSuite(spark_session) \
+    .onData(df) \
+    .addCheck(
+        check.hasSize(lambda x: x >= 3) \
+        .hasMin("congestion_surcharge", lambda x: x == 0) \
+        .isComplete("vendor_id")  \
+        .isUnique("dropoff_datetime")  \
+        .isContainedIn("store_and_fwd_flag", ["Y", "N"]) \
+        .isContainedIn("rate_code_id", ['1','2','3','4','5']) \
+        .isNonNegative("dropoff_location_id") \
+        .isNonNegative("trip_distance")) \
+    .run()
 
-# suggestionResult = ConstraintSuggestionRunner(spark) \
-#              .onData(df) \
-#              .addConstraintRule(DEFAULT()) \
-#              .run()
-
-# # Constraint Suggestions in JSON format
-# print(suggestionResult)
-
-## okay
-# from pydeequ.checks import *
-# from pydeequ.verification import *
-
-# check = Check(spark, CheckLevel.Warning, "Review Check")
-
-# checkResult = VerificationSuite(spark) \
-#     .onData(df) \
-#     .addCheck(
-#         check.hasSize(lambda x: x >= 3) \
-#         .hasMin("b", lambda x: x == 0) \
-#         .isComplete("c")  \
-#         .isUnique("a")  \
-#         .isContainedIn("a", ["foo", "bar", "baz"]) \
-#         .isNonNegative("b")) \
-#     .run()
-
-# checkResult_df = VerificationResult.checkResultsAsDataFrame(spark, checkResult)
-# checkResult_df.show()
-
-## erro
-# from pydeequ.repository import *
-# from pydeequ.analyzers import *
-
-# metrics_file = FileSystemMetricsRepository.helper_metrics_file(spark, 'metrics.json')
-# repository = FileSystemMetricsRepository(spark, metrics_file)
-# key_tags = {'tag': 'pydeequ hello world'}
-# resultKey = ResultKey(spark, ResultKey.current_milli_time(), key_tags)
-
-# analysisResult = AnalysisRunner(spark) \
-#     .onData(df) \
-#     .addAnalyzer(ApproxCountDistinct('b')) \
-#     .useRepository(repository) \
-#     .saveOrAppendResult(resultKey) \
-#     .run()
+checkResult_df = VerificationResult.checkResultsAsDataFrame(spark_session, checkResult)
+checkResult_df.show()
 
 spark_session.sparkContext._gateway.shutdown_callback_server()
 spark_session.stop()
