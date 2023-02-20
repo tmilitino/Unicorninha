@@ -7,7 +7,7 @@
 Projeto de conclusão de curso do CESAR SCHOOL voltado para avaliação de ferramentas de Qualidade de Dados.
 
 ## O por que do nome
-O nome foi uma sugestão da minha filha, que sempre falava que eu estava escrevendo o livro: A Unicorninha, como tareja da minha "escola"
+O nome foi uma sugestão da minha filha, por achar que eu estava escrevendo um livro, ela disse que o livro deveria se chamar: A Unicorninha, então decidi batizar o projeto como Unicorninha, em homenagem a ela!
 
 ## Ferramentas analisadas 
  
