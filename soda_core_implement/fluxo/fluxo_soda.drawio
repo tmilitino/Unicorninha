@@ -1,10 +1,10 @@
 <mxfile host="65bd71144e">
     <diagram name="Página-1" id="4sn41ggnogsn7ywIyjHy">
-        <mxGraphModel dx="2286" dy="1942" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="2526" dy="1622" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="olwb9iaUx9etVq0swbon-3" value="carrega o dataset no Spark" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="olwb9iaUx9etVq0swbon-3" value="Abrir o arquivo em Dataframe Spark" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="160" y="170" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="olwb9iaUx9etVq0swbon-4" value="&lt;h1&gt;Fluxo&amp;nbsp; Soda Core Scan - DF&lt;/h1&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
@@ -46,29 +46,29 @@
                 <mxCell id="olwb9iaUx9etVq0swbon-21" value="Salva / Exibe os resultados" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
                     <mxGeometry x="330" y="480" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="2" value="&lt;h1&gt;Spark&lt;/h1&gt;&lt;p&gt;Requer que uma seção seja criada e o arquivo carregado devesse criar uma tabela temporaia&amp;nbsp;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="-40" y="80" width="190" height="120" as="geometry"/>
+                <mxCell id="2" value="&lt;h1&gt;Spark&lt;/h1&gt;&lt;p&gt;Requer que uma seção seja criada, e posteriomente abrir o arquivo em um dataframe spark, alem de precisar criar uma tabela temporaia, onde seram executadas as querys.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="-40" y="80" width="190" height="150" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="&lt;h1&gt;Soda Scan&lt;/h1&gt;&lt;p&gt;Requer que um, objeo Scan seja instanciado e que a seção skpar carregada no scan alem de carregar os check que seram utilizados&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+                <mxCell id="3" value="&lt;h1&gt;Soda Scan&lt;/h1&gt;&lt;p&gt;Requer que um, objeo Scan seja instanciado e que a seção skpar carregada no scan alem de carregar os check que seram utilizados&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
                     <mxGeometry x="610" y="150" width="190" height="120" as="geometry"/>
                 </mxCell>
-                <mxCell id="4" value="Cria uma tabela temporaria" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+                <mxCell id="4" value="Cria uma tabela temporaria" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
                     <mxGeometry x="60" y="280" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="olwb9iaUx9etVq0swbon-3" target="4">
+                <mxCell id="8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="olwb9iaUx9etVq0swbon-3" target="4" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="-70" y="290" as="sourcePoint"/>
                         <mxPoint x="-210" y="340" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=-0.008;entryY=0.867;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="4" target="olwb9iaUx9etVq0swbon-18">
+                <mxCell id="10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="4" target="olwb9iaUx9etVq0swbon-18" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="470" y="330" as="sourcePoint"/>
                         <mxPoint x="330" y="380" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="11" value="&lt;h1&gt;Exec Scan&lt;/h1&gt;&lt;p&gt;Executa o scan nos dados e os resultados são salvos&amp;nbsp;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="480" y="400" width="190" height="120" as="geometry"/>
+                <mxCell id="11" value="&lt;h1&gt;Exec Scan&lt;/h1&gt;&lt;p&gt;Ao Executar o scan nos dados, eles podem ser exibidos ou salvos um um arquivo externo, porem requer tratamento para salvar os resultados&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="400" width="190" height="130" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
